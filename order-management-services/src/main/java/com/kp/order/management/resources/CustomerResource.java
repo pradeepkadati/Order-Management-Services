@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.kp.order.management.model.Customer;
@@ -30,7 +31,14 @@ public class CustomerResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Customer> getCustomers() {
+	public List<Customer> getCustomers(@QueryParam("sIndex") int sIndex, @QueryParam("size") int size) {
+		
+		//Pagination
+		if (sIndex >= 0 && size > 0) {
+			
+			return customerServcie.getPagedCustomers(sIndex, size);
+		}
+		
 		return customerServcie.getCustomers();
 	}
 	

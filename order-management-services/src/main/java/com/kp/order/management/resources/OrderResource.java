@@ -9,6 +9,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.container.ResourceContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -29,7 +30,11 @@ public class OrderResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Order> getOrders() {
+	public List<Order> getOrders(@QueryParam("sIndex") int sIndex,@QueryParam("size") int size) {
+		
+		if (sIndex >= 0 && size > 0) {
+			return orderService.getPagedOrders(sIndex, size);
+		}
 		return orderService.getOrders();
 	}
 

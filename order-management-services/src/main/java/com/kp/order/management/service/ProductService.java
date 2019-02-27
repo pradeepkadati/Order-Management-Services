@@ -40,5 +40,16 @@ public class ProductService {
 	public List<Product> getProducts() {
 		return new ArrayList<Product>(products.values());
 	}
+	
+	public List<Product> getPagedProducts(int index, int size) {
+
+		if ((size + index) > products.size()) {
+			return null;
+		}
+
+		List<Product> productList = new ArrayList<Product>(products.values());
+		return productList.subList(index, (size + index));
+	}
+
 
 }

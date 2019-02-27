@@ -41,4 +41,14 @@ public class CustomerService {
 		return new ArrayList<Customer>(customers.values());
 	}
 
+	public List<Customer> getPagedCustomers(int index, int size) {
+
+		if ((size + index) > customers.size()) {
+			return null;
+		}
+
+		List<Customer> customerList = new ArrayList<Customer>(customers.values());
+		return customerList.subList(index, (size + index));
+	}
+
 }

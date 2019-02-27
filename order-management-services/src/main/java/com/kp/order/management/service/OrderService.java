@@ -37,4 +37,14 @@ public class OrderService {
 	public void removeOrder(Long id) {
 		orders.remove(id);
 	}
+	
+	public List<Order> getPagedOrders(int index, int size) {
+
+		if ((size + index) > orders.size()) {
+			return null;
+		}
+
+		List<Order> orderList = new ArrayList<Order>(orders.values());
+		return orderList.subList(index, (size + index));
+	}
 }
