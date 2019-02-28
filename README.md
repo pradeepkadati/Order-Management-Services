@@ -6,4 +6,5 @@ Updated with
   
   Order Resource Communicates to Product and Customer Resource using ResourceContext.
   Updated Customer, Product and Order Resources to handle pagination based on start index and size.
+  Implemented Resource not found Exception and exception mappers to Customer Resource
 

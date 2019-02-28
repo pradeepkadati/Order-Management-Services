@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kp.order.management.database.OrderManagementDB;
+import com.kp.order.management.exceptions.ResourceNotFoundException;
 import com.kp.order.management.model.Customer;
 
 public class CustomerService {
@@ -34,7 +35,14 @@ public class CustomerService {
 	}
 
 	public Customer getCustomer(Long id) {
-		return customers.get(id);
+		
+		Customer customer = customers.get(id);
+		
+		if (customer == null) {
+			throw new ResourceNotFoundException("Customer with id "+id+" not found");
+		}
+		
+		return customer;
 	}
 
 	public List<Customer> getCustomers() {
